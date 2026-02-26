@@ -4,232 +4,822 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intelligent Design LLC — AI Voice Agents for HVAC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --bg: #0a0a0f;
+            --bg-light: #13131f;
+            --bg-card: #1a1a2e;
+            --text: #ffffff;
+            --text-muted: #a1a1aa;
+            --border: #27273a;
+            --success: #22c55e;
+        }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a0a0f;
-            color: #fff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
         }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
-        header {
-            padding: 40px 0;
-            border-bottom: 1px solid #1a1a2e;
+        
+        /* Navigation */
+        nav {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
         }
+        
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
         .logo {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, #a855f7 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--text);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--bg-card);
+        }
+        
+        .btn-large {
+            padding: 16px 32px;
+            font-size: 16px;
+        }
+        
+        /* Hero */
         .hero {
-            padding: 100px 0;
+            padding: 100px 0 60px;
             text-align: center;
         }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+        
+        .badge span {
+            color: var(--success);
+        }
+        
         .hero h1 {
             font-size: 64px;
             font-weight: 800;
-            margin-bottom: 20px;
             line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
         }
+        
         .hero h1 span {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, #a855f7 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        
         .hero p {
-            font-size: 24px;
-            color: #888;
-            max-width: 700px;
-            margin: 0 auto 40px;
-        }
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            padding: 20px 60px;
-            border-radius: 50px;
             font-size: 20px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s;
+            color: var(--text-muted);
+            max-width: 640px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
         }
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+        
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 60px;
         }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .hero-stat {
+            text-align: center;
+        }
+        
+        .hero-stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .hero-stat-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        
+        /* Live Demo Section */
         .demo-section {
             padding: 80px 0;
-            background: #0f0f1a;
+            background: var(--bg-light);
         }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .section-header p {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
         .demo-box {
-            background: #1a1a2e;
-            border-radius: 20px;
-            padding: 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 48px;
             max-width: 600px;
             margin: 0 auto;
             text-align: center;
         }
-        .phone-number {
-            font-size: 36px;
-            font-weight: 700;
-            color: #667eea;
-            margin: 20px 0;
+        
+        .demo-box h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
         }
-        .pricing {
-            padding: 80px 0;
-            text-align: center;
+        
+        .demo-box p {
+            color: var(--text-muted);
+            margin-bottom: 32px;
         }
-        .price-card {
-            background: #1a1a2e;
-            border-radius: 20px;
-            padding: 40px;
+        
+        .phone-input {
+            display: flex;
+            gap: 12px;
             max-width: 400px;
-            margin: 40px auto;
-            border: 2px solid #667eea;
+            margin: 0 auto 24px;
         }
-        .price {
-            font-size: 48px;
-            font-weight: 800;
-            margin: 20px 0;
+        
+        .phone-input input {
+            flex: 1;
+            padding: 14px 16px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            outline: none;
         }
-        .price-features {
-            list-style: none;
-            text-align: left;
-            margin: 30px 0;
+        
+        .phone-input input::placeholder {
+            color: var(--text-muted);
         }
-        .price-features li {
-            padding: 10px 0;
-            padding-left: 30px;
-            position: relative;
+        
+        .demo-note {
+            font-size: 13px;
+            color: var(--text-muted);
         }
-        .price-features li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #667eea;
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 100px 0;
         }
-        .stats {
+        
+        .steps {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 40px;
-            padding: 80px 0;
-            text-align: center;
+            margin-top: 60px;
         }
-        .stat h3 {
-            font-size: 48px;
-            font-weight: 800;
-            color: #667eea;
+        
+        .step {
+            position: relative;
         }
-        .stat p {
-            color: #888;
+        
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .step h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .step p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        /* Use Cases */
+        .use-cases {
+            padding: 100px 0;
+            background: var(--bg-light);
+        }
+        
+        .use-case-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 60px;
+        }
+        
+        .use-case-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.2s;
+        }
+        
+        .use-case-card:hover {
+            border-color: var(--primary);
+        }
+        
+        .use-case-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary) 0%, #a855f7 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .use-case-card h3 {
             font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
         }
-        footer {
-            padding: 40px 0;
+        
+        .use-case-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        /* Features */
+        .features {
+            padding: 100px 0;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 60px;
+        }
+        
+        .feature {
+            padding: 24px;
+        }
+        
+        .feature h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .feature p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        /* Pricing */
+        .pricing {
+            padding: 100px 0;
+            background: var(--bg-light);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 60px;
+        }
+        
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px 32px;
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--primary);
+            position: relative;
+        }
+        
+        .pricing-card.featured::before {
+            content: "Most Popular";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 4px 16px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .pricing-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .pricing-card .description {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+        
+        .price {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .price span {
+            font-size: 16px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            margin: 24px 0;
+        }
+        
+        .pricing-card li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            font-size: 14px;
+        }
+        
+        .pricing-card li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+        }
+        
+        /* Trust */
+        .trust {
+            padding: 60px 0;
             text-align: center;
-            color: #666;
-            border-top: 1px solid #1a1a2e;
+            border-top: 1px solid var(--border);
+        }
+        
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+        
+        .cta-section p {
+            color: var(--text-muted);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+        }
+        
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-left {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        
+        .footer-right {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .footer-right a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .footer-right a:hover {
+            color: var(--text);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+            
+            .steps, .feature-grid, .pricing-grid, .use-case-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
+    <!-- Navigation -->
+    <nav>
         <div class="container">
             <div class="logo">Intelligent Design LLC</div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#demo">Demo</a>
+                <a href="mailto:hello@intelligentdesign.ai" class="btn btn-primary">Get Started</a>
+            </div>
         </div>
-    </header>
+    </nav>
 
+    <!-- Hero -->
     <section class="hero">
         <div class="container">
+            <div class="badge">
+                <span>●</span> Now booking appointments 24/7 for HVAC companies
+            </div>
             <h1>Never Miss Another <span>$3,000 Emergency Call</span></h1>
-            <p>AI voice agents that answer your phones 24/7, book appointments, and qualify leads — while you sleep.</p>
-            <a href="#demo" class="cta-button">Hear the Demo</a>
+            <p>AI voice agents that answer your phones, book appointments, and qualify leads — while you sleep. Built specifically for HVAC and home service businesses.</p>
+            <div class="hero-buttons">
+                <a href="#demo" class="btn btn-primary btn-large">Try Live Demo</a>
+                <a href="#pricing" class="btn btn-secondary btn-large">View Pricing</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-number">67%</div>
+                    <div class="hero-stat-label">of after-hours calls go unanswered</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">$3,200</div>
+                    <div class="hero-stat-label">average emergency HVAC job</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">24/7</div>
+                    <div class="hero-stat-label">AI never sleeps</div>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- Live Demo -->
     <section class="demo-section" id="demo">
         <div class="container">
+            <div class="section-header">
+                <h2>Experience the AI</h2>
+                <p>Enter your number and receive a call from our AI receptionist in seconds. Hear exactly what your customers will experience.</p>
+            </div>
             <div class="demo-box">
-                <h2>Hear the Demo</h2>
-                <p>Our AI answers calls, qualifies leads, and books appointments 24/7</p>
+                <h3>📞 Receive a Live Demo Call</h3>
+                <p>Our AI will call you and demonstrate how it handles a typical HVAC emergency booking.</p>
+                <div class="phone-input">
+                    <input type="tel" placeholder="(555) 123-4567" id="phone">
+                    <button class="btn btn-primary" onclick="alert('Demo calling feature coming soon! For now, listen to recorded demos below.')">Call Me Now</button>
+                </div>
+                <p class="demo-note">📍 U.S. numbers only • Call takes 30 seconds</p>
                 
-                <div style="text-align: left; margin: 30px 0;">
-                    <div style="margin: 20px 0; padding: 20px; background: #0f0f1a; border-radius: 10px;">
-                        <p style="color: #888; font-size: 14px; margin-bottom: 10px;">🎵 Greeting</p>
-                        <audio controls style="width: 100%;">
-                            <source src="demo-greeting.mp3" type="audio/mpeg">
-                        </audio>
-                    </div>
-                    
-                    <div style="margin: 20px 0; padding: 20px; background: #0f0f1a; border-radius: 10px;">
-                        <p style="color: #888; font-size: 14px; margin-bottom: 10px;">🎵 Handling Emergency</p>
-                        <audio controls style="width: 100%;">
-                            <source src="demo-urgent.mp3" type="audio/mpeg">
-                        </audio>
-                    </div>
-                    
-                    <div style="margin: 20px 0; padding: 20px; background: #0f0f1a; border-radius: 10px;">
-                        <p style="color: #888; font-size: 14px; margin-bottom: 10px;">🎵 Booking Confirmation</p>
-                        <audio controls style="width: 100%;">
-                            <source src="demo-close.mp3" type="audio/mpeg">
-                        </audio>
+                <div style="margin-top: 40px; text-align: left;">
+                    <p style="color: var(--text-muted); margin-bottom: 16px; font-size: 14px;">Or listen to recorded demos:</p>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <div style="padding: 16px; background: var(--bg); border-radius: 8px;">
+                            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">🎵 Greeting & Qualification</p>
+                            <audio controls style="width: 100%;" src="demo-greeting.mp3"></audio>
+                        </div>
+                        <div style="padding: 16px; background: var(--bg); border-radius: 8px;">
+                            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">🎵 Emergency Call Handling</p>
+                            <audio controls style="width: 100%;" src="demo-urgent.mp3"></audio>
+                        </div>
                     </div>
                 </div>
-                
-                <p style="color: #888; font-size: 14px;">Live AI voice • 24/7 availability • Custom trained for HVAC</p>
             </div>
         </div>
     </section>
 
-    <section class="stats">
+    <!-- How It Works -->
+    <section class="how-it-works">
         <div class="container">
-            <div class="stat">
-                <h3>67%</h3>
-                <p>of emergency calls go to voicemail</p>
+            <div class="section-header">
+                <h2>Deploy in 3 Days, Not 3 Months</h2>
+                <p>Get your AI receptionist up and running with zero technical headaches.</p>
             </div>
-            <div class="stat">
-                <h3>$3,200</h3>
-                <p>average emergency HVAC job</p>
-            </div>
-            <div class="stat">
-                <h3>24/7</h3>
-                <p>AI never sleeps, never calls in sick</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>We Build Your Agent</h3>
+                    <p>Share your current scripts and booking process. We configure the AI to sound and act exactly how you want — using your preferred tone and terminology.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Connect Your Systems</h3>
+                    <p>Integrate with your calendar (Google, Outlook, Acuity), CRM, and dispatch software. The AI books directly into your existing workflow.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Go Live 24/7</h3>
+                    <p>Forward your calls or use our number. The AI answers every call instantly, books appointments, and sends you qualified leads with full context.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="pricing">
+    <!-- Use Cases -->
+    <section class="use-cases">
         <div class="container">
-            <h2>Simple Pricing</h2>
-            <div class="price-card">
-                <h3>Complete AI Receptionist</h3>
-                <div class="price">$1,500</div>
-                <p>one-time setup</p>
-                <ul class="price-features">
-                    <li>Custom AI voice agent</li>
-                    <li>24/7 call answering</li>
-                    <li>Appointment booking</li>
-                    <li>Emergency call escalation</li>
-                    <li>CRM integration</li>
-                    <li>SMS confirmations</li>
-                </ul>
-                <p style="margin-top: 20px; color: #888;">+ $297/month for unlimited calls</p>
-                <a href="mailto:hello@intelligentdesign.ai?subject=Interested in AI Voice Agent" class="cta-button" style="margin-top: 30px;">Get Early Access</a>
+            <div class="section-header">
+                <h2>Built for HVAC & Home Services</h2>
+                <p>Every feature designed around the specific needs of trades businesses.</p>
+            </div>
+            <div class="use-case-grid">
+                <div class="use-case-card">
+                    <div class="use-case-icon">🚨</div>
+                    <h3>Emergency Call Handling</h3>
+                    <p>Instantly identifies emergency situations (no heat, no AC, leaks) and prioritizes them. Dispatches on-call technicians automatically for true emergencies.</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">📅</div>
+                    <h3>Smart Appointment Booking</h3>
+                    <p>Checks your calendar in real-time, offers available slots, and books directly. Handles reschedules and cancellations without human intervention.</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">🎯</div>
+                    <h3>Lead Qualification</h3>
+                    <p>Asks the right questions upfront: service type, property details, timeframe, and budget. You get qualified leads with full context, not just names and numbers.</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">📱</div>
+                    <h3>Instant Notifications</h3>
+                    <p>Get SMS and email alerts for every booked appointment, emergency escalation, and hot lead. Review call transcripts and recordings anytime.</p>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Everything You Need</h2>
+                <p>Enterprise-grade features without the enterprise complexity.</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature">
+                    <h4>⚡ Sub-Second Response</h4>
+                    <p>AI answers in under 1 second. No awkward pauses, no "please hold" — just natural conversation.</p>
+                </div>
+                <div class="feature">
+                    <h4>🔧 Custom Workflows</h4>
+                    <p>Build call flows for different scenarios: new customers, existing clients, emergencies, after-hours.</p>
+                </div>
+                <div class="feature">
+                    <h4>📊 Call Analytics</h4>
+                    <p>Dashboard showing call volume, booking rates, peak hours, and missed opportunity tracking.</p>
+                </div>
+                <div class="feature">
+                    <h4>🔗 50+ Integrations</h4>
+                    <p>Connects with Google Calendar, Outlook, Salesforce, HubSpot, ServiceTitan, Housecall Pro, and more.</p>
+                </div>
+                <div class="feature">
+                    <h4>🔒 HIPAA Compliant</h4>
+                    <p>Enterprise-grade security with encrypted calls, secure data storage, and full compliance.</p>
+                </div>
+                <div class="feature">
+                    <h4>🌙 Always On</h4>
+                    <p>99.99% uptime guarantee. The AI never calls in sick, never takes vacation, never misses a call.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Simple, Transparent Pricing</h2>
+                <p>No hidden fees. No long-term contracts. Cancel anytime.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <p class="description">For solo operators just getting started</p>
+                    <div class="price">$997<span>setup</span></div>
+                    <ul>
+                        <li>AI voice agent</li>
+                        <li>500 minutes/month</li>
+                        <li>1 phone number</li>
+                        <li>Calendar integration</li>
+                        <li>Email notifications</li>
+                    </ul>
+                    <a href="mailto:hello@intelligentdesign.ai?subject=Starter Plan Inquiry" class="btn btn-secondary" style="width: 100%;">Get Started</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Professional</h3>
+                    <p class="description">For growing HVAC businesses</p>
+                    <div class="price">$1,497<span>setup</span></div>
+                    <ul>
+                        <li>Everything in Starter</li>
+                        <li>Unlimited minutes</li>
+                        <li>3 phone numbers</li>
+                        <li>CRM integration</li>
+                        <li>SMS notifications</li>
+                        <li>Call recordings</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <a href="mailto:hello@intelligentdesign.ai?subject=Professional Plan Inquiry" class="btn btn-primary" style="width: 100%;">Get Started</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <p class="description">For multi-location operations</p>
+                    <div class="price">Custom</div>
+                    <ul>
+                        <li>Everything in Professional</li>
+                        <li>Unlimited phone numbers</li>
+                        <li>Custom AI training</li>
+                        <li>API access</li>
+                        <li>Dedicated account manager</li>
+                        <li>SLA guarantee</li>
+                    </ul>
+                    <a href="mailto:hello@intelligentdesign.ai?subject=Enterprise Inquiry" class="btn btn-secondary" style="width: 100%;">Contact Sales</a>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 40px; color: var(--text-muted);">+ $297/month platform fee for Professional and Enterprise plans</p>
+        </div>
+    </section>
+
+    <!-- Trust -->
+    <section class="trust">
+        <div class="container">
+            <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 16px;">TRUSTED BY HVAC BUSINESSES IN HOUSTON</p>
+            <div class="trust-badges">
+                <div class="trust-badge">🔒 SOC 2 Compliant</div>
+                <div class="trust-badge">🏥 HIPAA Ready</div>
+                <div class="trust-badge">🇺🇸 US-Based</div>
+                <div class="trust-badge">⚡ 99.99% Uptime</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Stop Losing Calls. Start Booking 24/7.</h2>
+            <p>Join HVAC companies that never miss an opportunity. Get your AI receptionist deployed this week.</p>
+            <a href="mailto:hello@intelligentdesign.ai?subject=AI Receptionist Inquiry" class="btn btn-primary btn-large">Get Started Today</a>
+            <p style="margin-top: 24px; color: var(--text-muted); font-size: 14px;">Questions? Email hello@intelligentdesign.ai</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <p>© 2026 Intelligent Design LLC — Houston, TX</p>
-            <p style="margin-top: 10px; font-size: 14px;">Founded by Johnny, an AI entrepreneur. Documented in real-time.</p>
+            <div class="footer-left">
+                © 2026 Intelligent Design LLC • Houston, TX • Built by AI
+            </div>
+            <div class="footer-right">
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#demo">Demo</a>
+                <a href="mailto:hello@intelligentdesign.ai">Contact</a>
+            </div>
         </div>
     </footer>
 </body>
